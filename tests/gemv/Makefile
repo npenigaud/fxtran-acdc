@@ -14,7 +14,10 @@ include $(ARCH)/Makefile.inc
 boot:
 	../../bin/fxtran-boot --prefix $(BUILD)/fxtran-acdc -CXX "$(CXX)" -CC "$(CC)" -F90 "$(FC)"
 
-$(BUILD)/main.o: $(BOOT) $(SRC)/main.F90 
+$(BUILD)/hip_profiling.o : $(BOOT) $(SRC)/hip_profiling.F90
+	$(FC) -o $(BUILD)/hip_profiling.o -c $(SRC)/hip_profiling.F90
+
+$(BUILD)/main.o: $(BOOT) $(SRC)/main.F90 $(BUILD)/hip_profiling.o
 	$(FC) -o $(BUILD)/main.o -c $(SRC)/main.F90
 
 $(BUILD)/main.x: $(BOOT) $(BUILD)/main.o 

@@ -425,7 +425,7 @@ IF (PRESENT(YSPP_RSWINHF)) THEN
 
 ELSE
 
-!$ACDC PARALLEL, TARGET=OpenMP/OpenMPSingleColumn/OpenACCSingleColumn {
+!$ACDC PARALLEL, TARGET=OpenMP/OpenMPSingleColumn/OpenACCSingleColumn/OpenACCManyBlocks/ManyBlocks {
 
   ZRSWINHF(KIDIA:KFDIA) = RSWINHF
 
@@ -447,7 +447,7 @@ IF (PRESENT(YSPP_RLWINHF)) THEN
 
 ELSE
 
-!$ACDC PARALLEL, TARGET=OpenMP/OpenMPSingleColumn/OpenACCSingleColumn {
+!$ACDC PARALLEL, TARGET=OpenMP/OpenMPSingleColumn/OpenACCSingleColumn/OpenACCManyBlocks/ManyBlocks {
 
   ZRLWINHF(KIDIA:KFDIA) = RLWINHF
 
@@ -573,7 +573,7 @@ ELSEIF ( .not. LUSEPRE2017RAD ) THEN
   ENDIF
 
 
-!$ACDC PARALLEL, TARGET=OpenMP/OpenMPSingleColumn/OpenACCSingleColumn, NAME=ECRAD_POST {
+!$ACDC PARALLEL, TARGET=OpenMP/OpenMPSingleColumn/OpenACCSingleColumn/OpenACCManyBlocks/ManyBlocks, NAME=ECRAD_POST {
 
   ZPFDIF(KIDIA:KFDIA) = ZFRSOD(KIDIA:KFDIA) - ZPFDIR(KIDIA:KFDIA)
 
@@ -581,7 +581,7 @@ ELSEIF ( .not. LUSEPRE2017RAD ) THEN
 
 ENDIF
 
-!$ACDC PARALLEL, TARGET=OpenMP/OpenMPSingleColumn/OpenACCSingleColumn, NAME=FINISH {
+!$ACDC PARALLEL, TARGET=OpenMP/OpenMPSingleColumn/OpenACCSingleColumn/OpenACCManyBlocks/ManyBlocks, NAME=FINISH {
 
 DO JLON=KIDIA,KFDIA
   PSWFC (JLON, 0)=ZFCS(JLON,     0)
